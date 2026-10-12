@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZCANDYTV - MOD/STREAMING TOOL</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:system-ui,sans-serif;color:#e8e9f5;background:linear-gradient(135deg,#05060d,#0b1030,#14206a,#05060d);background-size:300% 300%;animation:bg 16s ease infinite;overflow-x:hidden;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+@keyframes bg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+.orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:.45;pointer-events:none;animation:orb 18s ease-in-out infinite alternate}
+.o1{width:380px;height:380px;background:#3a62c9;top:-100px;left:-80px}
+.o2{width:320px;height:320px;background:#6a4cff;bottom:-90px;right:-60px;animation-delay:-8s}
+@keyframes orb{to{transform:translate(90px,60px) scale(1.2)}}
+.cube{position:fixed;bottom:-60px;border:2px solid rgba(197,202,255,.45);background:rgba(58,98,201,.18);pointer-events:none;animation:rise linear infinite;box-shadow:0 0 14px rgba(120,150,255,.25)}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:1}90%{opacity:.8}100%{transform:translateY(-115vh) rotate(260deg);opacity:0}}
+.card{position:relative;z-index:2;isolation:isolate;background:rgba(12,15,38,.82);backdrop-filter:blur(10px);border-radius:18px;padding:34px 30px;box-shadow:0 0 70px rgba(58,98,201,.4);animation:in .9s cubic-bezier(.2,.9,.3,1.2) both}
+.card::before{content:"";position:absolute;inset:-2px;border-radius:20px;z-index:-1;background:linear-gradient(90deg,#3a62c9,#c5caff,#7a5cff,#3a62c9);background-size:300% 100%;animation:slide 4s linear infinite}
+.card::after{content:"";position:absolute;inset:0;border-radius:18px;z-index:-1;background:rgba(12,15,38,.95)}
+@keyframes slide{to{background-position:300% 0}}
+@keyframes in{from{opacity:0;transform:translateY(30px) scale(.94)}}
+h1{font-family:'Alfa Slab One','Rockwell Extra Bold',Georgia,serif;font-weight:400;margin:0;text-align:center;font-size:clamp(34px,9vw,52px);letter-spacing:.02em;line-height:1.05;background:linear-gradient(90deg,#c5caff,#fff,#7f95ff,#c5caff);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite;filter:drop-shadow(0 0 14px rgba(120,150,255,.6))}
+@keyframes shine{to{background-position:250% 0}}
+.sub{font-family:'Alfa Slab One',Georgia,serif;text-align:center;color:#8da2ff;letter-spacing:.18em;font-size:clamp(12px,3.4vw,16px);margin:8px 0 22px;text-shadow:0 0 12px rgba(100,130,255,.7)}
+.sub i{display:inline-block;width:8px;height:8px;background:#c5caff;margin:0 8px 1px;transform:rotate(45deg);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.2}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+body.app{align-items:flex-start;padding:16px}
+#login .card{width:min(400px,100%)}
+#login.hide,#main.hide{display:none}
+#login{width:100%;display:flex;justify-content:center;align-items:center;min-height:90vh}
+.card.shake{animation:shake .45s}@keyframes shake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+label{display:block;font-size:12px;letter-spacing:.12em;color:#8da2ff;margin:14px 0 6px;text-transform:uppercase}
+input,select,textarea{width:100%;padding:12px 13px;border-radius:10px;border:1px solid #2b3466;background:#080a1c;color:#fff;font-size:16px;outline:none;transition:.25s;font-family:inherit}
+textarea{resize:vertical;min-height:90px}
+input:focus,select:focus,textarea:focus{border-color:#8da2ff;box-shadow:0 0 0 3px rgba(120,150,255,.25),0 0 18px rgba(100,130,255,.3)}
+button{position:relative;overflow:hidden;padding:11px 16px;border:0;border-radius:10px;background:linear-gradient(90deg,#3a62c9,#6a4cff);color:#fff;font-size:14px;font-weight:700;letter-spacing:.08em;cursor:pointer;transition:transform .2s,box-shadow .2s}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(80,110,255,.5)}
+button.ghost{background:transparent;border:1px solid #3a4580;color:#c5caff}button.ghost:hover{background:#2a3470}
+button.red{background:linear-gradient(90deg,#b0304a,#d6455f)}
+.full{width:100%;margin-top:20px;padding:14px}
+#e{min-height:20px;margin-top:12px;text-align:center;font-size:13px;color:#ff8a9a}
+#main{width:100%;max-width:880px;margin:0 auto;position:relative;z-index:2;animation:in .7s both}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.bar h1{font-size:clamp(22px,5vw,30px);text-align:left}
+.who{font-size:13px;color:#9aa4d6}.who b{color:#fff}
+.badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;letter-spacing:.08em;background:#2a3470;color:#c5caff;margin-left:4px;text-transform:uppercase}
+.tabs{display:flex;gap:8px;margin-bottom:14px}.tabs button{flex:0 0 auto}.tabs button.on{background:linear-gradient(90deg,#3a62c9,#6a4cff);border:0}
+.panel{background:rgba(12,15,38,.85);backdrop-filter:blur(8px);border:1px solid #2b3466;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 0 30px rgba(58,98,201,.2)}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 200px}
+.cnt{text-align:right;font-size:12px;color:#7f8ac4;margin-top:4px}.cnt.bad{color:#ff8a9a}
+.pin{border-left:4px solid #6a4cff;animation:in .4s both}
+.pin .t{white-space:pre-wrap;word-break:break-word;font-size:15px;line-height:1.5;margin:8px 0}
+.pin .m{font-size:12px;color:#7f8ac4}.pin .a{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pin .a button{padding:8px 12px;font-size:12px}
+.tag{display:inline-block;background:#3a62c9;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700}
+mark{background:#c5caff;color:#14206a;border-radius:3px;padding:0 2px}
+.empty{text-align:center;color:#7f8ac4;padding:24px}
+#msg{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:9;background:#1d2a66;border:1px solid #8da2ff;padding:10px 18px;border-radius:10px;font-size:14px;opacity:0;transition:.3s;pointer-events:none}
+#msg.show{opacity:1}
+.urow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid #1f2650}.urow b{flex:1 1 120px}.urow select{width:auto;padding:8px}.urow button{padding:8px 12px;font-size:12px}
+</style></head>
+<body>
+<div id="login"><form class="card" id="f">
+  <h1>ZCANDYTV</h1><div class="sub"><i></i>MOD/STREAMING TOOL<i></i></div>
+  <label for="n">Name</label><input id="n" autocomplete="username" autocapitalize="off" spellcheck="false">
+  <label for="p">Passwort</label><input id="p" type="password" autocomplete="current-password">
+  <button class="full">ANMELDEN</button><div id="e"></div>
+</form></div>
+
+<div id="main" class="hide">
+  <div class="bar"><h1>ZCANDYTV</h1><div><span class="who">Angemeldet als <b id="un"></b><span class="badge" id="ur"></span></span> <button class="ghost" id="out" style="margin-left:8px">Abmelden</button></div></div>
+  <div class="tabs"><button id="tp" class="on">📌 Pin-Nachrichten</button><button id="ta" class="ghost" style="display:none">👥 Accounts</button></div>
+
+  <div id="pins">
+    <div class="panel"><div class="row">
+      <div><label style="margin-top:0">Streamer</label><select id="fs"></select></div>
+      <div><label style="margin-top:0">Suche</label><input id="q" placeholder="z.B. minecraft"></div>
+    </div></div>
+    <div class="panel"><b id="ft">Neue Pin-Nachricht</b>
+      <div class="row"><div><label>Für Streamer</label><select id="ns"></select></div></div>
+      <label>Nachricht</label><textarea id="nb" maxlength="600" placeholder="Pin-Text hier einfügen …"></textarea>
+      <div class="cnt" id="cnt">0 / 500</div>
+      <div class="row" style="margin-top:10px"><button id="save">Pin speichern</button><button id="cancel" class="ghost" style="display:none">Abbrechen</button></div>
+    </div>
+    <div id="list"></div>
+  </div>
+
+  <div id="accs" style="display:none">
+    <div class="panel"><b>Neuen Account erstellen</b>
+      <div class="row"><div><label>Name</label><input id="an" autocomplete="off" autocapitalize="off"></div>
+      <div><label>Passwort (mind. 8)</label><input id="ap" autocomplete="new-password"></div>
+      <div><label>Rolle</label><select id="ar"><option value="mod">Mod</option><option value="streamer">Streamer</option></select></div></div>
+      <button id="add" style="margin-top:14px">Account erstellen</button></div>
+    <div class="panel" id="ul"></div>
+  </div>
+</div>
+<div id="msg"></div>
+<script>(function(){
+  for(let i=0;i<5;i++){}
+  const o=document.createElement("div");o.innerHTML='<div class="orb o1"></div><div class="orb o2"></div>';document.body.prepend(...o.children);
+  for(let i=0;i<26;i++){
+    const c=document.createElement("div");c.className="cube";
+    const s=10+Math.random()*34;
+    c.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}vw;animation-duration:${9+Math.random()*14}s;animation-delay:${-Math.random()*20}s`;
+    document.body.appendChild(c);
+  }
+})();
+</script>
+<script>
+const SB_URL="https://vxmffhkoouxgzesjufpu.supabase.co",SB_KEY="sb_publishable_lm2HJVtCp_a0RuiS0vZ0Eg_AuDdjlbV";
+const $=id=>document.getElementById(id);
+let tok=localStorage.getItem("zc_tok"),me=null,pins=[],streamers=[],editId=null;
+async function rpc(fn,args){
+  const h={apikey:SB_KEY,"Content-Type":"application/json"};
+  if(SB_KEY.startsWith("eyJ"))h.Authorization="Bearer "+SB_KEY;
+  const r=await fetch(SB_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:h,body:JSON.stringify(args)});
+  const j=await r.json().catch(()=>null);
+  if(!r.ok)throw new Error((j&&j.message)||"Verbindungsfehler");
+  return j;
+}
+let mt;function toast(t){const m=$("msg");m.textContent=t;m.classList.add("show");clearTimeout(mt);mt=setTimeout(()=>m.classList.remove("show"),2200);}
+const ROLE={admin:"Admin",mod:"Mod",streamer:"Streamer"};
+
+async function start(){
+  if(!tok)return;
+  try{me=await rpc("app_me",{tok});}catch(e){me=null;}
+  if(!me){localStorage.removeItem("zc_tok");tok=null;return;}
+  $("login").classList.add("hide");$("main").classList.remove("hide");document.body.classList.add("app");
+  $("un").textContent=me.name;$("ur").textContent=ROLE[me.role];
+  $("ta").style.display=me.role==="admin"?"":"none";
+  await loadPins();
+}
+$("f").onsubmit=async ev=>{
+  ev.preventDefault();$("e").textContent="Prüfe …";
+  try{
+    const r=await rpc("app_login",{p_name:$("n").value,p_pw:$("p").value});
+    if(!r.ok){$("e").textContent=r.msg;const f=$("f");f.classList.remove("shake");void f.offsetWidth;f.classList.add("shake");return;}
+    tok=r.token;localStorage.setItem("zc_tok",tok);$("e").textContent="";$("p").value="";start();
+  }catch(e){$("e").textContent=e.message;}
+};
+$("out").onclick=async()=>{try{await rpc("app_logout",{tok});}catch(e){}localStorage.removeItem("zc_tok");location.reload();};
+$("tp").onclick=()=>tab(true);$("ta").onclick=()=>{tab(false);loadUsers();};
+function tab(p){$("pins").style.display=p?"":"none";$("accs").style.display=p?"none":"";$("tp").className=p?"":"ghost";$("ta").className=p?"ghost":"";}
+
+// ---- Pins ----
+async function loadPins(){
+  try{[pins,streamers]=await Promise.all([rpc("app_pins",{tok}),rpc("app_streamers",{tok})]);}
+  catch(e){toast(e.message);return;}
+  const cur=$("fs").value;
+  $("fs").innerHTML='<option value="">Alle Streamer</option>'+streamers.map(s=>`<option>${esc(s)}</option>`).join("");
+  $("fs").value=streamers.includes(cur)?cur:"";
+  const ns=$("ns").value;
+  $("ns").innerHTML='<option value="" disabled>Streamer wählen …</option>'+streamers.map(s=>`<option>${esc(s)}</option>`).join("");
+  $("ns").value=streamers.includes(ns)?ns:($("fs").value||"");
+  render();
+}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function hl(el,text,q){
+  if(!q){el.textContent=text;return;}
+  const re=new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","gi");
+  text.split(re).forEach((part,i)=>{
+    if(i%2){const m=document.createElement("mark");m.textContent=part;el.appendChild(m);}
+    else el.appendChild(document.createTextNode(part));
+  });
+}
+function render(){
+  const q=$("q").value.trim(),fs=$("fs").value,L=$("list");L.innerHTML="";
+  const vis=pins.filter(p=>(!fs||p.streamer===fs)&&(!q||p.body.toLowerCase().includes(q.toLowerCase())));
+  if(!vis.length){L.innerHTML='<div class="panel empty">Keine Pins gefunden.</div>';return;}
+  vis.forEach(p=>{
+    const d=document.createElement("div");d.className="panel pin";
+    const tag=document.createElement("span");tag.className="tag";tag.textContent=p.streamer;
+    const t=document.createElement("div");t.className="t";hl(t,p.body,q);
+    const m=document.createElement("div");m.className="m";
+    m.textContent=p.body.length+" Zeichen · von "+p.created_by+" · "+new Date(p.created_at).toLocaleString("de-DE",{dateStyle:"short",timeStyle:"short"});
+    const a=document.createElement("div");a.className="a";
+    const cb=document.createElement("button");cb.textContent="📋 Kopieren";cb.onclick=()=>copy(p.body);a.appendChild(cb);
+    if(me.role==="admin"||p.created_by===me.name){
+      const eb=document.createElement("button");eb.className="ghost";eb.textContent="✏️ Bearbeiten";eb.onclick=()=>edit(p);a.appendChild(eb);
+      const db=document.createElement("button");db.className="red";db.textContent="🗑 Löschen";db.onclick=()=>del(p.id);a.appendChild(db);
+    }
+    d.append(tag,t,m,a);L.appendChild(d);
+  });
+}
+async function copy(t){
+  try{await navigator.clipboard.writeText(t);}catch(e){const x=document.createElement("textarea");x.value=t;document.body.appendChild(x);x.select();document.execCommand("copy");x.remove();}
+  toast("Kopiert!");
+}
+$("fs").onchange=()=>{if($("fs").value&&!editId)$("ns").value=$("fs").value;render();};
+$("q").oninput=render;
+$("nb").oninput=()=>{const n=$("nb").value.length;$("cnt").textContent=n+" / 500";$("cnt").className="cnt"+(n>500?" bad":"");};
+function edit(p){editId=p.id;$("nb").value=p.body;$("ns").value=p.streamer;$("nb").oninput();$("ft").textContent="Pin bearbeiten";$("save").textContent="Änderung speichern";$("cancel").style.display="";scrollTo({top:0,behavior:"smooth"});}
+function reset(){editId=null;$("nb").value="";$("nb").oninput();$("ft").textContent="Neue Pin-Nachricht";$("save").textContent="Pin speichern";$("cancel").style.display="none";}
+$("cancel").onclick=reset;
+$("save").onclick=async()=>{
+  const body=$("nb").value.trim(),s=$("ns").value;
+  if(!s)return toast("Bitte einen Streamer wählen.");
+  if(!body)return toast("Bitte einen Text eingeben.");
+  if(body.length>500)return toast("Maximal 500 Zeichen.");
+  try{
+    if(editId)await rpc("app_pin_upd",{tok,p_id:editId,p_streamer:s,p_body:body});
+    else await rpc("app_pin_add",{tok,p_streamer:s,p_body:body});
+    reset();toast("Gespeichert!");loadPins();
+  }catch(e){toast(e.message);}
+};
+async function del(id){if(!confirm("Pin wirklich löschen?"))return;try{await rpc("app_pin_del",{tok,p_id:id});loadPins();}catch(e){toast(e.message);}}
+
+// ---- Accounts (Admin) ----
+async function loadUsers(){
+  let us;try{us=await rpc("app_users_list",{tok});}catch(e){return toast(e.message);}
+  const box=$("ul");box.innerHTML="<b>Alle Accounts</b>";
+  us.forEach(u=>{
+    const r=document.createElement("div");r.className="urow";
+    const n=document.createElement("b");n.textContent=u.name;r.appendChild(n);
+    if(u.role==="admin"){const b=document.createElement("span");b.className="badge";b.textContent="Admin (fest)";r.appendChild(b);}
+    else{
+      const s=document.createElement("select");s.innerHTML='<option value="mod">Mod</option><option value="streamer">Streamer</option>';s.value=u.role;
+      s.onchange=async()=>{try{await rpc("app_user_role",{tok,p_name:u.name,p_role:s.value});toast("Rolle geändert");loadPins();}catch(e){toast(e.message);}};
+      const pw=document.createElement("button");pw.className="ghost";pw.textContent="🔑 Passwort";
+      pw.onclick=async()=>{const x=prompt("Neues Passwort für "+u.name+" (mind. 8 Zeichen):");if(!x)return;try{await rpc("app_user_pw",{tok,p_name:u.name,p_pw:x});toast("Passwort geändert");}catch(e){toast(e.message);}};
+      const d=document.createElement("button");d.className="red";d.textContent="🗑";
+      d.onclick=async()=>{if(!confirm(u.name+" wirklich löschen?"))return;try{await rpc("app_user_del",{tok,p_name:u.name});loadUsers();loadPins();}catch(e){toast(e.message);}};
+      r.append(s,pw,d);
+    }
+    box.appendChild(r);
+  });
+}
+$("add").onclick=async()=>{
+  try{await rpc("app_user_add",{tok,p_name:$("an").value.trim(),p_pw:$("ap").value,p_role:$("ar").value});
+    $("an").value="";$("ap").value="";toast("Account erstellt!");loadUsers();loadPins();}catch(e){toast(e.message);}
+};
+start();
+</script></body></html>
